@@ -1,26 +1,26 @@
 package net.weg.api.controller;
 
 import lombok.AllArgsConstructor;
-import net.weg.api.model.Usuario;
-import net.weg.api.service.UsuarioService;
+import net.weg.api.model.Cliente;
+import net.weg.api.service.ClienteService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/cliente")
 @AllArgsConstructor
-public class UsuarioController {
+public class ClienteController {
 
-    private final UsuarioService usuarioService;
+    private final ClienteService usuarioService;
 
     @GetMapping("/{id}")
-    public Usuario buscarUsuario(@PathVariable Integer id){
+    public Cliente buscarUsuario(@PathVariable Integer id){
         return usuarioService.buscarUm(id);
     }
 
     @GetMapping()
-    public Collection<Usuario> buscarTodos(){
+    public Collection<Cliente> buscarTodos(){
         return usuarioService.buscarTodos();
     }
 
@@ -30,18 +30,18 @@ public class UsuarioController {
     }
 
     @PostMapping()
-    public void inserir(@RequestBody Usuario usuario){
+    public void inserir(@RequestBody Cliente usuario){
         usuarioService.salvar(usuario);
     }
 
     @PutMapping()
-    public void update(@RequestBody Usuario usuario){
+    public void update(@RequestBody Cliente usuario){
         usuarioService.salvar(usuario);
     }
 
     @PutMapping("/{id}")
     public void update(@PathVariable Integer id,
-                       @RequestBody Usuario usuario){
+                       @RequestBody Cliente usuario){
         usuarioService.salvar(usuario);
     }
 

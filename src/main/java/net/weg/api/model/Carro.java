@@ -20,4 +20,7 @@ public class Carro {
     private String modelo;
     private Double preco;
     private Integer ano;
+    @OneToOne (mappedBy = "veiculo")
+    //(acima) entra na classe seguro e busca o atributo especificado para fazer a relacao com esta tabela
+    private Seguro seguro;
 }

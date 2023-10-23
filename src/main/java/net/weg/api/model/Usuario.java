@@ -1,33 +1,30 @@
 package net.weg.api.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.id.factory.spi.GenerationTypeStrategy;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Set;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "tb_usuario")
+@Table(name = "usuario")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
     @Column(name = "username", unique = true, length = 45, nullable = false)
     private String nome;
     private String senha;
     private Integer idade;
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private Set<Carro> carro;
     @ManyToMany(cascade = CascadeType.PERSIST)
     private Set<Endereco> endereco;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Habilitacao habilitacao;
-    @ManyToOne
-    private Consorcio consorcio;
+
 
 }
