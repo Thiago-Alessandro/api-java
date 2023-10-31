@@ -15,6 +15,7 @@ public class Carro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String placa;
     private String marca;
     private String cor;
     private String modelo;
