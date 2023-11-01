@@ -31,6 +31,7 @@ public class NavBarApp extends AppLayout {
         Tabs tabs = new Tabs();
         tabs.getStyle().set("margin", "auto");
         tabs.add(
+                createTab("Cadastrar Usuario", CadastroUsuario.class),
 //                createTab("Início", Inicio.class),
                 createTab("Meus Seguros", MeusSeguros.class),
                 createTab("Meus Automóveis", MeusAutomoveis.class));

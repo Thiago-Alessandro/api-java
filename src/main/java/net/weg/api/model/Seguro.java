@@ -10,18 +10,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_plano")
+@IdClass(SeguroIdClass.class)
 public class Seguro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer seguroId;
+    @Id
+    private Integer seguradoraId;
+
     private Double valor;
     private String nome;
     private String descricao;
     private Double valorFranquia;
+
     @ManyToOne
+    @JoinColumn(name = "seguradoraId")
     private Seguradora seguradora;
     @OneToOne
+//    @MapsId("veiculoId")
     private Carro veiculo;
     @ManyToOne
     private Cliente cliente;
