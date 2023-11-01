@@ -2,10 +2,15 @@ package net.weg.api.controller;
 
 import lombok.AllArgsConstructor;
 import net.weg.api.model.Carro;
+import net.weg.api.model.dto.CarroCadastroDTO;
+import net.weg.api.model.dto.CarroEdicaoDTO;
 import net.weg.api.service.CarroService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/carro")
@@ -15,8 +20,14 @@ public class CarroController {
     private CarroService carroService;
 
     @GetMapping("/{id}")
-    public Carro buscarCarro(@PathVariable Integer id){
-        return carroService.buscarUm(id);
+    public ResponseEntity<Carro> buscarCarro(@PathVariable(value = "id") Integer id) {
+        try {
+            return ResponseEntity.ok(carroService.buscarUm(id));
+            // return new ResponseEntity<>(carroService.buscarUm(id),HttpStatus.OK);
+            // return new ResponseEntity<>(carroService.buscarUm(id),200);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping()
@@ -29,14 +40,24 @@ public class CarroController {
         carroService.delete(id);
     }
 
-    @PostMapping()
-    public void inserir(@RequestBody Carro Carro){
-        carroService.salvar(Carro);
+    @PostMapping
+    public ResponseEntity<Carro> inserirCarro(@RequestBody CarroCadastroDTO carroDTO) {
+        try {
+            return new ResponseEntity(carroService.cadastrar(carroDTO), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+
     }
 
-    @PutMapping()
-    public void update(@RequestBody Carro Carro){
-        carroService.salvar(Carro);
+    @PutMapping
+    public ResponseEntity<Carro> atualizarCarro(@RequestBody CarroEdicaoDTO carroDTO) {
+        try {
+            return new ResponseEntity<>(carroService.editar(carroDTO), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
     
 }

@@ -16,9 +16,9 @@ public class ClienteService {
 
     private final UsuarioRepository usuarioRepositoy;
 
-    public void salvar(UsuarioCadastroDTO ucdto){
+    public void salvar(UsuarioCadastroDTO ucdto) {
         Cliente cliente = new Cliente();
-        BeanUtils.copyProperties(ucdto, cliente);
+        BeanUtils.copyProperties(ucdto,cliente);
         usuarioRepositoy.save(cliente);
     }
 

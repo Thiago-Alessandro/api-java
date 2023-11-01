@@ -13,6 +13,13 @@ import lombok.NoArgsConstructor;
 @IdClass(SeguroIdClass.class)
 public class Seguro {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Integer id;
+//
+//    @EmbeddedId
+//    private SeguroId id;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer seguroId;
@@ -26,11 +33,14 @@ public class Seguro {
 
     @ManyToOne
     @JoinColumn(name = "seguradoraId")
+//    @MapsId("seguradoraId")
     private Seguradora seguradora;
     @OneToOne
 //    @MapsId("veiculoId")
     private Carro veiculo;
     @ManyToOne
     private Cliente cliente;
+
+//  embeddedId usa mapsId() e Idclass(ClassName.class) usa JoinColumn()
 
 }

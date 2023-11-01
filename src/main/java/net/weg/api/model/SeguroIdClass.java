@@ -1,5 +1,6 @@
 package net.weg.api.model;
 
+import jakarta.persistence.IdClass;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
