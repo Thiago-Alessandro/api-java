@@ -15,11 +15,13 @@ import lombok.NoArgsConstructor;
 @Embeddable
 public class SeguroId {
 
-//    @EmbeddedId
+    //    @EmbeddedId
+
     private Integer seguradoraId;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer seguroId;
 
 //    private Integer veiculoId;
 
 }
+

@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+
 @Table(name = "tb_seguro")
+
 @IdClass(SeguroIdClass.class)
 public class Seguro {
 
@@ -21,7 +23,7 @@ public class Seguro {
 //    private SeguroId id;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer seguroId;
     @Id
     private Integer seguradoraId;
@@ -30,16 +32,18 @@ public class Seguro {
     private String nome;
     private String descricao;
     private Double valorFranquia;
+
     @ManyToOne
     @JoinColumn(name = "seguradoraId")
 //    @MapsId("seguradoraId")
     private Seguradora seguradora;
 //    @MapsId("veiculoId")
     @OneToOne
+//    @MapsId("veiculoId")
     private Carro veiculo;
     @ManyToOne
     private Cliente cliente;
 
-    //embeddedId usa mapsId() e Idclass(ClassName.class) usa JoinColumn()
+//  embeddedId usa mapsId() e Idclass(ClassName.class) usa JoinColumn()
 
 }

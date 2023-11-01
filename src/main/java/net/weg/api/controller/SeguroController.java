@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import net.weg.api.model.Cliente;
 import net.weg.api.model.Seguradora;
 import net.weg.api.model.Seguro;
+import net.weg.api.model.dto.SeguroCadastroDTO;
 import net.weg.api.service.SeguroService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +23,8 @@ public class SeguroController {
     }
 
     @PostMapping
-    public void inserir(@RequestBody Seguro seguro){
-        seguroService.salvar(seguro);
+    public void inserir(@RequestBody SeguroCadastroDTO seguroCadastroDTO){
+        seguroService.cadastrar(seguroCadastroDTO);
     }
 
     @PutMapping
