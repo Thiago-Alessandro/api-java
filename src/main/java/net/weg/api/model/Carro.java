@@ -24,4 +24,10 @@ public class Carro {
     @OneToOne (mappedBy = "veiculo")
     //(acima) entra na classe seguro e busca o atributo especificado para fazer a relacao com esta tabela
     private Seguro seguro;
+
+    @Override
+    public String toString(){
+        return marca + " - " + modelo + " (" + placa + ") ";
+    }
+
 }

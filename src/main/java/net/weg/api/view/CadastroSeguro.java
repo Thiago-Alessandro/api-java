@@ -39,13 +39,17 @@ public class CadastroSeguro extends FormLayout {
         NumberField valor = new NumberField("Valor");
         TextField descricao = new TextField("Descrição");
         NumberField valorFranquia = new NumberField("Valor Franquia");
+
         Select<Seguradora> seguradora = new Select<>();
         seguradora.setLabel("Seguradora");
         seguradora.setItems(seguradoraService.buscar());
+
         Select<Carro> veiculo = new Select<>();
         veiculo.setLabel("veiculo");
         veiculo.setItems(carroService.buscarTodos());
+
         Select<Cliente> usuario = new Select<>();
+//        usuario.setItemLabelGenerator(Usuario::toString);
         usuario.setLabel("Ususario");
         usuario.setItems(usuarioService.buscarTodos());
         add(valor,valorFranquia,descricao,veiculo,seguradora,usuario);

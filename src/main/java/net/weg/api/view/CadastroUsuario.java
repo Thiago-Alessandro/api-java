@@ -29,6 +29,8 @@ public class CadastroUsuario extends FormLayout {
 
     private ClienteService usuarioService;
 
+    private TextField nome = new TextField("Nome");
+    private TextField sobrenome = new TextField("Sobrenome");
     private TextField ususario = new TextField("Usuario");
     private PasswordField senha = new PasswordField("Senha");
     private PasswordField confirmacaoSenha = new PasswordField("Confirmação Senha");
@@ -65,6 +67,8 @@ public class CadastroUsuario extends FormLayout {
                     );
                     usuarioService.salvar(
                         new UsuarioCadastroDTO(
+                                nome.getValue(),
+                                sobrenome.getValue(),
                                 ususario.getValue(),
                                 senha.getValue(),
                                 idade.getValue(),
@@ -83,7 +87,13 @@ public class CadastroUsuario extends FormLayout {
 
         cancelar = new Button("Cancelar", e -> new UI().navigate("/"));
 
-        add(ususario, senha, confirmacaoSenha, idade, tabelaEnderecos, novoEndereco, cadastroEndereco, salvar, cancelar);
+        add(nome, sobrenome,
+            ususario, senha,
+            confirmacaoSenha,
+            idade, tabelaEnderecos,
+            novoEndereco,
+            cadastroEndereco,
+            salvar, cancelar);
 
     }
 

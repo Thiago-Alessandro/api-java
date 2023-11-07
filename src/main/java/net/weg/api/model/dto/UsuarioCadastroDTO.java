@@ -11,6 +11,8 @@ import java.util.Set;
 public class UsuarioCadastroDTO {
 
     private String nome;
+    private String sobrenome;
+    private String usuario;
     private String senha;
     private Integer idade;
     private Set<Endereco> endereco;

@@ -3,6 +3,7 @@ package net.weg.api.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -12,21 +13,23 @@ import lombok.NoArgsConstructor;
 
 @Table(name = "tb_seguro")
 
-@IdClass(SeguroIdClass.class)
+//@IdClass(SeguroIdClass.class)
 public class Seguro {
 
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Integer id;
 
-//    @EmbeddedId
-//    private SeguroId id;
+//    EmbeddedId
+    @EmbeddedId
+    private SeguroId id = new SeguroId();
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    private Integer seguroId;
-    @Id
-    private Integer seguradoraId;
+//    IdClass
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.TABLE)
+//    private Integer seguroId;
+//    @Id
+//    private Integer seguradoraId;
 
     private Double valor;
     private String nome;
@@ -34,11 +37,12 @@ public class Seguro {
     private Double valorFranquia;
 
     @ManyToOne
-    @JoinColumn(name = "seguradoraId")
-//    @MapsId("seguradoraId")
+//    @JoinColumn(name = "seguradoraId")
+    @MapsId("seguradoraId")
     private Seguradora seguradora;
 //    @MapsId("veiculoId")
     @OneToOne
+    @EqualsAndHashCode.Exclude
 //    @MapsId("veiculoId")
     private Carro veiculo;
     @ManyToOne
