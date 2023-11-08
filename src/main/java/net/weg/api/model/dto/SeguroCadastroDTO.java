@@ -11,7 +11,7 @@ import net.weg.api.model.Seguradora;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SeguroCadastroDTO {
+public class SeguroCadastroDTO implements IDTO {
 
     private Double valor;
 //    private String nome;

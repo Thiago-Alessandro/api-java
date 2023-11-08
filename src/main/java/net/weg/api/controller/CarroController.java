@@ -37,7 +37,7 @@ public class CarroController {
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id){
-        carroService.delete(id);
+        carroService.deletar(id);
     }
 
     @PostMapping

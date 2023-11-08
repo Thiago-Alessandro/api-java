@@ -23,38 +23,44 @@ import java.nio.channels.SelectableChannel;
 
 @Data
 @AllArgsConstructor
-public class CadastroSeguro extends FormLayout {
+public class CadastroSeguro extends Dialog {
 
     private SeguroService seguroService;
+
+    private NumberField valor = new NumberField("Valor");
+    private TextField descricao = new TextField("Descrição");
+    private NumberField valorFranquia = new NumberField("Valor Franquia");
+
+    private Select<Seguradora> seguradora = new Select<>();
+    private Select<Carro> veiculo = new Select<>();
+    private Select<Cliente> usuario = new Select<>();
+
+    private Button salvar;
+    private Button cancelar;
+
+    private FormLayout formLayout = new FormLayout(valor, valorFranquia,descricao, veiculo, seguradora, usuario);
 
     CadastroSeguro(SeguradoraService seguradoraService,
                    CarroService carroService,
                    ClienteService usuarioService,
-                   SeguroService seguroService,
-                   Dialog dialog
+                   SeguroService seguroService
                    ){
 
         this.seguroService = seguroService;
 
-        NumberField valor = new NumberField("Valor");
-        TextField descricao = new TextField("Descrição");
-        NumberField valorFranquia = new NumberField("Valor Franquia");
-
-        Select<Seguradora> seguradora = new Select<>();
         seguradora.setLabel("Seguradora");
         seguradora.setItems(seguradoraService.buscar());
 
-        Select<Carro> veiculo = new Select<>();
         veiculo.setLabel("veiculo");
         veiculo.setItems(carroService.buscarTodos());
 
-        Select<Cliente> usuario = new Select<>();
 //        usuario.setItemLabelGenerator(Usuario::toString);
         usuario.setLabel("Ususario");
         usuario.setItems(usuarioService.buscarTodos());
-        add(valor,valorFranquia,descricao,veiculo,seguradora,usuario);
 
-        Button salvar = new Button("Salvar", e -> {
+        add(formLayout);
+
+        salvar = new Button("Salvar", e -> {
 
             SeguroCadastroDTO seguroCadastroDTO =
                     new SeguroCadastroDTO(valor.getValue(),
@@ -69,12 +75,12 @@ public class CadastroSeguro extends FormLayout {
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
-            dialog.close();
+            this.close();
         });
 
-        Button cancelar = new Button("Cancelar", e -> dialog.close());
+        cancelar = new Button("Cancelar", e -> this.close());
 
-        dialog.getFooter().add(salvar, cancelar);
+        this.getFooter().add(salvar, cancelar);
 
     }
 

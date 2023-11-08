@@ -1,60 +1,50 @@
 package net.weg.api.view;
 
-import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.ComponentEventListener;
+
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
+
 import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.router.Route;
+
 import net.weg.api.model.dto.CarroCadastroDTO;
 import net.weg.api.service.CarroService;
 
-import javax.swing.event.ChangeEvent;
 
-public class CadastroCarro extends FormLayout {
+public class CadastroCarro extends Dialog {
 
     private final CarroService carroService;
 
-    public CadastroCarro(CarroService carroService, Dialog dialog){
+    private TextField placa = new TextField("Placa");
+    private TextField marca = new TextField("Marca");
+    private TextField cor = new TextField("Cor");
+    private TextField modelo = new TextField("Modelo");
+    private IntegerField ano = new IntegerField("Ano");
+    private NumberField preco = new NumberField("Preço");
+
+
+    public CadastroCarro(CarroService carroService) throws Exception {
 
         this.carroService = carroService;
 
-        TextField placa = new TextField("Placa");
-        TextField marca = new TextField("Marca");
-        TextField cor = new TextField("Cor");
-        TextField modelo = new TextField("Modelo");
-        IntegerField ano = new IntegerField("Ano");
-        NumberField preco = new NumberField("Preço");
+        FormLayout form = new FormLayout(placa, marca, cor, modelo, ano, preco);
 
-        Button salvar = new Button("Salvar", e -> {
-
-                preco.getValue();
-                CarroCadastroDTO carroCadastroDTO =
+        Button salvar = new BotaoSalvar (
+                carroService,
                         new CarroCadastroDTO(marca.getValue(),
                                 placa.getValue(),
                                 cor.getValue(),
                                 modelo.getValue(),
                                 preco.getValue(),
-                                ano.getValue());
+                                ano.getValue()));
 
-                try {
-                    carroService.cadastrar(carroCadastroDTO);
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
-                dialog.close();
-        });
+        Button cancelar = new Button("Cancelar", e -> this.close());
 
-        Button cancelar = new Button("Cancelar", e -> dialog.close());
+        this.getFooter().add(salvar, cancelar);
 
-        dialog.getFooter().add(salvar, cancelar);
-
-        add(placa,marca,cor,modelo,ano,preco, salvar, cancelar);
+        add(form);
 
     }
 

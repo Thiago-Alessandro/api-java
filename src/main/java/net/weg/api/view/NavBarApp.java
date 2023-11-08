@@ -1,29 +1,34 @@
 package net.weg.api.view;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.tabs.Tab;
-import com.vaadin.flow.component.tabs.Tabs;
-import com.vaadin.flow.component.applayout.AppLayout;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
-import net.weg.api.view.MeusAutomoveis;
 
 @Route("")
 public class NavBarApp extends AppLayout {
 
     public NavBarApp() {
-        H1 title = new H1("MyApp");
+        H1 title = new H1("Seguraí");
         title.getStyle().set("font-size", "var(--lumo-font-size-l)")
                 .set("left", "var(--lumo-space-l)").set("margin", "0")
                 .set("position", "absolute");
 
         Tabs tabs = getTabs();
 
-        addToNavbar(title, tabs);
+        Button cadastro = new Button("Cadastrte-se", e -> {
+            UI.getCurrent().navigate("cadastro-usuario");
+        });
+
+        cadastro.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        cadastro.getStyle().set("margin","0 5% 0 0");
+
+        addToNavbar(title, tabs, cadastro);
     }
     // end::snippet[]
 
@@ -32,11 +37,11 @@ public class NavBarApp extends AppLayout {
         tabs.getStyle().set("margin", "auto");
         tabs.add(
                 createTab("Cadastrar Usuario", CadastroUsuario.class),
-//                createTab("Início", Inicio.class),
+                createTab("Início"),
                 createTab("Meus Seguros", MeusSeguros.class),
-                createTab("Meus Automóveis", MeusAutomoveis.class));
-//                createTab("Seguradoras", Seguradoras.class),
-//                createTab("Perfil", Perfil.class));
+                createTab("Meus Automóveis", MeusAutomoveis.class),
+                createTab("Seguradoras", SeguradorasView.class),
+                createTab("Perfil"));
         return tabs;
     }
 

@@ -31,7 +31,7 @@ public class SeguroController {
 
     @PutMapping
     public  void atualizar(@RequestBody Seguro seguro){
-        seguroService.salvar(seguro);
+        seguroService.editar(seguro);
     }
 
     @GetMapping("/{seguroId}/{seguradoraId}")

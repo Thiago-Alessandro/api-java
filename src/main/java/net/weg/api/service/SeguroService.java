@@ -14,17 +14,16 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class SeguroService {
+public class SeguroService implements IService<Seguro, Integer>{
 
     private SeguroRepository seguroRepository;
-
 
     public Seguro cadastrar (SeguroCadastroDTO seguroCadastroDTO){
         Seguro seguro = new Seguro();
         BeanUtils.copyProperties(seguroCadastroDTO,seguro);
         System.out.println(seguro);
         return seguroRepository.save(seguro);}
-    public void salvar (Seguro seguro){
+    public void editar (Seguro seguro){
         seguroRepository.save(seguro);
     }
 

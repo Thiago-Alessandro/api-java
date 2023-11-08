@@ -3,6 +3,7 @@ package net.weg.api.service;
 
 import lombok.AllArgsConstructor;
 import net.weg.api.model.Cliente;
+import net.weg.api.model.dto.IDTO;
 import net.weg.api.model.dto.UsuarioCadastroDTO;
 import net.weg.api.repository.UsuarioRepository;
 import org.springframework.beans.BeanUtils;
@@ -12,14 +13,15 @@ import java.util.Collection;
 
 @Service
 @AllArgsConstructor
-public class ClienteService {
+public class ClienteService implements IService<Cliente, Integer>{
 
     private final UsuarioRepository usuarioRepositoy;
 
-    public void salvar(UsuarioCadastroDTO ucdto) {
+    public Cliente cadastrar(IDTO dto) {
+        UsuarioCadastroDTO ucdto = (UsuarioCadastroDTO) dto;
         Cliente cliente = new Cliente();
         BeanUtils.copyProperties(ucdto,cliente);
-        usuarioRepositoy.save(cliente);
+        return usuarioRepositoy.save(cliente);
     }
 
     public Cliente buscarUm(Integer id){
@@ -30,8 +32,15 @@ public class ClienteService {
         return  usuarioRepositoy.findAll();
     }
 
-    public void delete(Integer id){
+    public void deletar(Integer id){
         usuarioRepositoy.deleteById(id);
+    }
+
+    public Cliente editar(IDTO dto) {
+        UsuarioCadastroDTO ucdto = (UsuarioCadastroDTO) dto;
+        Cliente cliente = new Cliente();
+        BeanUtils.copyProperties(ucdto,cliente);
+        return usuarioRepositoy.save(cliente);
     }
 
 }

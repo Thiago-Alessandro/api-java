@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import net.weg.api.model.Carro;
 import net.weg.api.model.dto.CarroCadastroDTO;
 import net.weg.api.model.dto.CarroEdicaoDTO;
+import net.weg.api.model.dto.IDTO;
 import net.weg.api.repository.CarroRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,14 @@ import java.util.Collection;
 
 @Service
 @AllArgsConstructor
-public class CarroService {
+public class CarroService implements IService<Carro, Integer> {
 
    // private UsuarioDAO usuarioDAO;
     private final CarroRepository carroRepository;
 
-    public Carro cadastrar(CarroCadastroDTO carroDTO) throws Exception {
+    @Override
+    public Carro cadastrar(IDTO dto) throws Exception {
+        CarroCadastroDTO carroDTO = (CarroCadastroDTO) dto;
         if (carroRepository.existsByPlaca(carroDTO.getPlaca())) {
             throw  new Exception("Há um carro com a placa "+carroDTO.getPlaca()+" cadastrado.");
         }
@@ -29,7 +32,8 @@ public class CarroService {
 
     }
 
-    public Carro editar(CarroEdicaoDTO carroDTO) throws Exception {
+    public Carro editar(IDTO dto) throws Exception {
+        CarroEdicaoDTO carroDTO = (CarroEdicaoDTO) dto;
         if (!carroRepository.existsById(carroDTO.getId())){
             throw new Exception("Não foi encontrado nenhum carro com o id"+carroDTO.getId());
         }
@@ -46,7 +50,7 @@ public class CarroService {
         return carroRepository.findAll();
     }
 
-    public void delete(Integer id){
+    public void deletar(Integer id){
         carroRepository.deleteById(id);
     }
 
