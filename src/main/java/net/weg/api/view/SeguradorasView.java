@@ -14,7 +14,7 @@ public class SeguradorasView extends PaginaPadrao<Seguradora> {
     SeguradorasView(SeguradoraService seguradoraService){
 
         super("Seguradoras",
-                seguradoraService.buscar(),
+                seguradoraService.buscarTodos(),
                 Seguradora.class);
         this.seguradoraService = seguradoraService;
 

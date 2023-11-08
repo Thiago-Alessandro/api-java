@@ -4,6 +4,7 @@ package net.weg.api.controller;
 import lombok.AllArgsConstructor;
 import net.weg.api.model.Seguradora;
 import net.weg.api.model.dto.IDTO;
+import net.weg.api.model.dto.SeguradoraCadastroDTO;
 import net.weg.api.service.SeguradoraService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,27 +18,27 @@ public class SeguradoraController {
     private SeguradoraService seguradoraService;
 
     @DeleteMapping
-    public void remover (@RequestBody Integer id){
+    public void deletar (@RequestBody Integer id){
         seguradoraService.deletar(id);
     }
 
     @PostMapping
-    public void inserir(@RequestBody Seguradora seguradora){
-        seguradoraService.cadastrar((IDTO) seguradora);
+    public void cadastrar(@RequestBody SeguradoraCadastroDTO seguradora){
+        seguradoraService.cadastrar(seguradora);
     }
 
     @PutMapping
-    public  void atualizar(@RequestBody Seguradora seguradora){
-        seguradoraService.editar((IDTO)seguradora);
+    public  void editar(@RequestBody SeguradoraCadastroDTO seguradora){
+        seguradoraService.editar(seguradora);
     }
 
     @GetMapping("/{id}")
-    public Seguradora buscar(@PathVariable Integer id){
+    public Seguradora buscarUm(@PathVariable Integer id){
         return seguradoraService.buscarUm(id);
     }
 
     @GetMapping
-    public List<Seguradora> buscar(){
+    public List<Seguradora> buscarTodos(){
         return seguradoraService.buscarTodos();
     }
 

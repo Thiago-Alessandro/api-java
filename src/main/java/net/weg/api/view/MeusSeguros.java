@@ -26,7 +26,7 @@ public class MeusSeguros extends PaginaPadrao {
                         SeguroService seguroService){
 
         super("Meus Seguros",
-                seguroService.buscar(),
+                seguroService.buscarTodos(),
                 Seguro.class,
                 new Button("Novo Seguro", e -> {new CadastroSeguro(seguradoraService,carroService,usuarioService, seguroService).open();})
                 );

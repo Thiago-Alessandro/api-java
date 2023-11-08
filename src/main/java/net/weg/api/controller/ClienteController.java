@@ -16,7 +16,7 @@ public class ClienteController {
     private final ClienteService usuarioService;
 
     @GetMapping("/{id}")
-    public Cliente buscarUsuario(@PathVariable Integer id){
+    public Cliente buscarUm(@PathVariable Integer id){
         return usuarioService.buscarUm(id);
     }
 
@@ -26,25 +26,25 @@ public class ClienteController {
     }
 
     @DeleteMapping
-    public void delete(@RequestParam Integer id){
-        usuarioService.delete(id);
+    public void deletar(@RequestParam Integer id){
+        usuarioService.deletar(id);
     }
 
     @PostMapping()
-    public void inserir(@RequestBody UsuarioCadastroDTO usuario){
+    public void cadastrar(@RequestBody UsuarioCadastroDTO usuario){
 
-        usuarioService.salvar(usuario);
+        usuarioService.cadastrar(usuario);
     }
 
     @PutMapping()
-    public void update(@RequestBody UsuarioCadastroDTO usuario){
-        usuarioService.salvar(usuario);
+    public void eitar(@RequestBody UsuarioCadastroDTO usuario){
+        usuarioService.editar(usuario);
     }
 
     @PutMapping("/{id}")
-    public void update(@PathVariable Integer id,
+    public void editar(@PathVariable Integer id,
                        @RequestBody UsuarioCadastroDTO usuario){
-        usuarioService.salvar(usuario);
+        usuarioService.editar(usuario);
     }
 
 }

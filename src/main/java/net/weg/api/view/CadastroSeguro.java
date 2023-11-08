@@ -49,7 +49,7 @@ public class CadastroSeguro extends Dialog {
         this.seguroService = seguroService;
 
         seguradora.setLabel("Seguradora");
-        seguradora.setItems(seguradoraService.buscar());
+        seguradora.setItems(seguradoraService.buscarTodos());
 
         veiculo.setLabel("veiculo");
         veiculo.setItems(carroService.buscarTodos());

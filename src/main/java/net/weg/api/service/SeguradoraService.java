@@ -3,8 +3,10 @@ package net.weg.api.service;
 import lombok.AllArgsConstructor;
 import net.weg.api.model.Seguradora;
 import net.weg.api.model.dto.IDTO;
+import net.weg.api.model.dto.SeguradoraCadastroDTO;
 import net.weg.api.repository.SeguradoraRepository;
 import org.hibernate.persister.entity.SingleTableEntityPersister;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +18,9 @@ public class SeguradoraService implements IService<Seguradora, Integer> {
     private SeguradoraRepository seguradoraRepository;
 
     public Seguradora cadastrar (IDTO dto){
-        Seguradora seguradora = (Seguradora) dto;
+        SeguradoraCadastroDTO seguradoraCadastroDTO = (SeguradoraCadastroDTO) dto;
+        Seguradora seguradora = new Seguradora();
+        BeanUtils.copyProperties(seguradoraCadastroDTO, seguradora);
         return seguradoraRepository.save(seguradora);
     }
 
@@ -33,7 +37,9 @@ public class SeguradoraService implements IService<Seguradora, Integer> {
     }
 
     public Seguradora editar (IDTO dto){
-        Seguradora seguradora = (Seguradora) dto;
+        SeguradoraCadastroDTO seguradoraCadastroDTO = (SeguradoraCadastroDTO) dto;
+        Seguradora seguradora = new Seguradora();
+        BeanUtils.copyProperties(seguradoraCadastroDTO, seguradora);
         return seguradoraRepository.save(seguradora);
     }
 
